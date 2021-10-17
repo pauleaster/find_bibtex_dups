@@ -19,11 +19,20 @@ fn main() -> Result<(),Error>{
 
     for  bib1 in bib {
         let fields = bib1.fields;
-        if let Some(pages) = fields.get("pages") {
-            // println!("{:?}",&pages);
-            if let Chunk::Normal(s) = &pages[0] {
-                println!("{}",&s);
+        if let Some(title) = fields.get("title") {
+            // println!("{:?}",&title);
+            match &title[0] {
+                Chunk::Normal(s) =>  {
+                    println!("N:{}",&s);
+                },
+                Chunk::Verbatim(s) => {
+                    println!("V:{}",&s);
+                    if s == "Black hole excision for dynamic black holes" {
+                        i += 10;
+                    }
+                }
             }
+
 
             i += 1;
 
